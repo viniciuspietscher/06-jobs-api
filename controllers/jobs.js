@@ -31,7 +31,7 @@ const updateJob = async (req, res) => {
     body: { company, position },
     params: { id: jobId },
   } = req
-  if (company === "" || position === "") {
+  if (!(company && position)) {
     throw new BadRequestError("Company or position fields can not be nil")
   }
   const job = await Job.findByIdAndUpdate(
